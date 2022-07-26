@@ -2,6 +2,7 @@ import { useRecoilValue } from 'recoil';
 import { todoListState } from './atom';
 import { TodoListStats } from './TodoListStats';
 import { TodoItemCreator } from './TodoItemCreator';
+import { TodoItem } from './TodoItem';
 
 const TodoList = () => {
 
@@ -17,8 +18,9 @@ const TodoList = () => {
             <TodoItemCreator />
 
             {/* atomから読み込んだ初期値を展開しながら描画 */}
+            {/* divで囲われたtodoListStateの要素が描画される */}
             {todoList.map((item) => (
-                <div key={item.id}>{item.title}</div>
+                <TodoItem key={item.id} item={item} />
             ))}
         </>
     );
