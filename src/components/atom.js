@@ -1,8 +1,8 @@
-import {atom} from "recoil";
+import { atom } from 'recoil';
 
 
 // コンポーネントで扱う初期値（グローバルで他コンポーネントからも参照できる？atom()の中）
-const todoListSate = atom({
+export const todoListState = atom({
     key: 'todoListState', // 一意にする必要ある
     default: [
         {
@@ -15,8 +15,10 @@ const todoListSate = atom({
             title: 'Slack確認',
             isComplete: false,
         },
+        {
+            id: 3,
+            title: 'コーヒーを買う',
+            isComplete: false,
+        },
     ],
 });
-
-export class todoListState {
-}

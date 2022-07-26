@@ -2,6 +2,7 @@
 import {selector} from "recoil";
 import { todoListState } from './atom';
 
+// Todoの数を返す
 export const todoListStatsState = selector({
     key: 'todoListStatsState', // 一意にする必要ある atomのkeyともかぶってはいけないかは不明
     get: ({ get }) => {
@@ -10,4 +11,3 @@ export const todoListStatsState = selector({
         return totalNum;
     },
 });
-
