@@ -22,3 +22,9 @@ atomで定義した値を取得する。
 ## useSetRecoilState
 更新だけしたい場合に使う。
 >setter関数だけを利用したい場合にはuseSetRecoilState Hookを利用することもできます。
+
+## その他
+## React RouterのLinkでURLは変わるが画面が遷移しない
+React18＋React.StrictModeの時に発生するバグらしい。
+index.jsの<React.StrictMode />を削除すると動く。
+react-router_v6だと直ってるかもしれないからv6使ったほうがいいかな。
