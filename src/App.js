@@ -1,7 +1,7 @@
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Link, Route, Switch} from "react-router-dom";
 import TodoList from "./components/TodoList";
 import {RecoilRoot} from "recoil";
-import {Menu} from "./components/Menu";
+// import {Menu} from "./components/Menu";
 
 
 function Home() {
@@ -26,7 +26,18 @@ function App() {
           <RecoilRoot>
               <div style={{ margin: '2em' }}>
                   <h1>Hello React Router</h1>
-                  <Menu />
+                  <ul>
+                      <li>
+                          <Link to="/">Home</Link>
+                      </li>
+                      <li>
+                          <Link to="/about">About</Link>
+                      </li>
+                      <li>
+                          <Link to="/contact">Contact</Link>
+                      </li>
+                  </ul>
+
                   <Switch>
                       <Route exact path="/">
                           <Home />
