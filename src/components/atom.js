@@ -22,3 +22,9 @@ export const todoListState = atom({
         },
     ],
 });
+
+// Todoの完了状態フィルターの値をコンポーネント間で共有するためのatom
+export const todoListFilterState = atom({
+    key: 'todoListFilterState',
+    default: 'すべて',
+});

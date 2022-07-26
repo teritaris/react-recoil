@@ -1,6 +1,6 @@
 // atomの値を取得できるselector()
 import {selector} from "recoil";
-import { todoListState } from './atom';
+import { todoListFilterState, todoListState } from './atom';
 
 // Todoの数、完了数、未完了数を返す
 export const todoListStatsState = selector({
@@ -14,6 +14,23 @@ export const todoListStatsState = selector({
             totalNum,
             totalCompletedNum,
             totalUncompletedNum,
+        }
+    },
+});
+
+export const filteredTodoListState = selector({
+    key: 'filteredTodoListState',
+    get: ({get}) => {
+        const filter = get(todoListFilterState); // atomからfilterの状態を取得
+        const list = get(todoListState); // atomからTodo項目を取得
+
+        switch (filter) {
+            case '完了':
+                return list.filter((item) => item.isComplete); // 完了のやつだけの配列を返す
+            case '未完了':
+                return list.filter((item) => !item.isComplete); // 未完了のやつだけの配列を返す
+            default:
+                return list;
         }
     },
 });
