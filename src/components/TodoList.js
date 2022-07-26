@@ -1,5 +1,4 @@
-import { useRecoilValue, useRecoilState } from 'recoil';
-import { todoListFilterState } from './atom';
+import { useRecoilValue } from 'recoil';
 import { TodoListStats } from './TodoListStats';
 import { TodoItemCreator } from './TodoItemCreator';
 import { TodoItem } from './TodoItem';
