@@ -1,24 +1,23 @@
 import { useRecoilValue } from 'recoil';
 import { todoListState } from './atom';
-import { todoListStatsState } from './selector'
+import { TodoListStats } from './TodoListStats';
 
-const TodoList = () => {
+function TodoList() {
+    // atomから初期値を読み込む
     const todoList = useRecoilValue(todoListState);
-    const totalNum = useRecoilValue(todoListStatsState);
-    console.log(todoList)
     return (
         <>
             <h1>RecoilによるTodoアプリ</h1>
 
-            <ul>
-                <li>Todoの登録数:{totalNum}</li>
-            </ul>
+            {/*Todoリストの数を表示するコンポーネントを読み込み*/}
+            <TodoListStats />
 
+            {/* atomから読み込んだ初期値を展開しながら描画 */}
             {todoList.map((item) => (
                 <div key={item.id}>{item.title}</div>
             ))}
         </>
-    )
+    );
 }
 
 export default TodoList;
