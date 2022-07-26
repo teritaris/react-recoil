@@ -4,15 +4,11 @@ import { TodoListStats } from './TodoListStats';
 import { TodoItemCreator } from './TodoItemCreator';
 import { TodoItem } from './TodoItem';
 import { filteredTodoListState } from './selector';
+import { TodoListFilters } from './TodoListFilter';
 
 const TodoList = () => {
 
     const todoList = useRecoilValue(filteredTodoListState);
-    const [filter, setFilter] = useRecoilState(todoListFilterState)
-
-    const handleChange = (e) => {
-        setFilter(e.target.value)
-    }
 
     return (
         <>
@@ -21,11 +17,8 @@ const TodoList = () => {
             {/*Todoリストの数を表示するコンポーネントを読み込み*/}
             <TodoListStats />
 
-            <select value={filter} onChange={handleChange}>
-                <option value="すべて">すべて</option>
-                <option value="完了">完了</option>
-                <option value="未完了">未完了</option>
-            </select>
+            {/*完了状態でフィルターするコンポーネントを読み込み*/}
+            <TodoListFilters />
 
             {/*Todo項目を追加するコンポーネントを読み込み*/}
             <TodoItemCreator />
