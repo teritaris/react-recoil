@@ -1,4 +1,4 @@
-import {Routes, Route, Link, NavLink} from "react-router-dom";
+import {Routes, Route, Link, NavLink, useResolvedPath, useMatch} from "react-router-dom";
 // import TodoList from "./components/TodoList";
 import {RecoilRoot} from "recoil";
 import Home from "./components/Home";
@@ -28,10 +28,9 @@ function App() {
                       >About</NavLink>
                   </li>
                   <li>
-                      <Link to="/contact">Contact</Link>
+                      <CustomLink to="/contact">Contact</CustomLink>
                   </li>
               </ul>
-
 
               <Routes>
                   <Route path="/" element={<Home />} />
@@ -43,6 +42,21 @@ function App() {
           </div>
       </RecoilRoot>
   );
+}
+
+const CustomLink = ({ children, to, ...props }) => {
+    let resolved = useResolvedPath(to);
+    let match = useMatch({
+        path: resolved.pathname,
+        end: true,
+    });
+    return (
+        <div>
+            <Link style={{ color: match ? 'blue' : 'none' }} to={to} {...props}>
+                {children}
+            </Link>
+        </div>
+    )
 }
 
 export default App;
