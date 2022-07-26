@@ -1,63 +1,47 @@
-import {BrowserRouter, Link, Route, Switch} from "react-router-dom";
-import TodoList from "./components/TodoList";
+import {Routes, Route, Link, NavLink} from "react-router-dom";
+// import TodoList from "./components/TodoList";
 import {RecoilRoot} from "recoil";
+import Home from "./components/Home";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import NoMatch from "./components/Nomatch";
+import './App.css';
 // import {Menu} from "./components/Menu";
-
-
-function Home() {
-    return <h2>Home</h2>;
-}
-
-function About() {
-    return <h2>About</h2>;
-}
-
-function Contact() {
-    return <h2>Contact</h2>;
-}
-
-function NotFound() {
-    return <h2>Not Found Page</h2>;
-}
 
 function App() {
   return (
-      <BrowserRouter>
-          <RecoilRoot>
-              <div style={{ margin: '2em' }}>
-                  <h1>Hello React Router</h1>
-                  <ul>
-                      <li>
-                          <Link to="/">Home</Link>
-                      </li>
-                      <li>
-                          <Link to="/about">About</Link>
-                      </li>
-                      <li>
-                          <Link to="/contact">Contact</Link>
-                      </li>
-                  </ul>
+      <RecoilRoot>
+          <div style={{ margin: '2em' }}>
+              <h1>Hello React Router</h1>
 
-                  <Switch>
-                      <Route exact path="/">
-                          <Home />
-                      </Route>
-                      <Route path="/about">
-                          <About />
-                      </Route>
-                      <Route path="/contact">
-                          <Contact />
-                      </Route>
-                      <Route path="/todo">
-                          <TodoList />
-                      </Route>
-                      <Route>
-                          <NotFound />
-                      </Route>
-                  </Switch>
-              </div>
-          </RecoilRoot>
-      </BrowserRouter>
+              <ul>
+                  <li>
+                      <NavLink
+                          style={({ isActive }) => (isActive ? { color: 'blue' } : undefined)}
+                          to="/"
+                      >Home</NavLink>
+                  </li>
+                  <li>
+                      <NavLink
+                          className={({ isActive }) => (isActive ? 'active' : undefined)}
+                          to="/about"
+                      >About</NavLink>
+                  </li>
+                  <li>
+                      <Link to="/contact">Contact</Link>
+                  </li>
+              </ul>
+
+
+              <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact message="Hello Contact"/>} />
+                  <Route path="*" element={<NoMatch />} />
+              </Routes>
+                      {/*<TodoList />*/}
+          </div>
+      </RecoilRoot>
   );
 }
 
