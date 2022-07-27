@@ -6,6 +6,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Posts from "./components/Posts";
 import Post from "./components/Post"
+import PostIndex from "./components/PostIndex";
 
 import NoMatch from "./components/Nomatch";
 import './App.css';
@@ -50,6 +51,7 @@ function App() {
                   <Route path="/about" element={<About />} />
                   <Route path="/contact" element={<Contact message="Hello Contact"/>} />
                   <Route path="/posts" element={<Posts />}>
+                      <Route index element={<PostIndex />} />
                       <Route path=":postId" element={<Post />} />
                   </Route>
                   <Route path="*" element={<NoMatch />} />
