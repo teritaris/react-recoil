@@ -4,6 +4,9 @@ import {RecoilRoot} from "recoil";
 import Home from "./components/Home";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import Posts from "./components/Posts";
+import Post from "./components/Post"
+
 import NoMatch from "./components/Nomatch";
 import './App.css';
 // import {Menu} from "./components/Menu";
@@ -21,6 +24,7 @@ function App() {
                           to="/"
                       >Home</NavLink>
                   </li>
+
                   <li>
                       <NavLink
                           className={({ isActive }) => (isActive ? 'active' : undefined)}
@@ -30,12 +34,24 @@ function App() {
                   <li>
                       <CustomLink to="/contact">Contact</CustomLink>
                   </li>
+
+                  <li>
+                      <NavLink
+                          className={({ isActive }) => (isActive ? 'active' : undefined)}
+                          to={"/posts"}
+                      >
+                          Posts
+                      </NavLink>
+                  </li>
               </ul>
 
               <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/contact" element={<Contact message="Hello Contact"/>} />
+                  <Route path="/posts" element={<Posts />}>
+                      <Route path=":postId" element={<Post />} />
+                  </Route>
                   <Route path="*" element={<NoMatch />} />
               </Routes>
                       {/*<TodoList />*/}
