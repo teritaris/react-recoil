@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 
-
+// 検索対象の製品一覧
 const products = [
     {
         id: 1,
@@ -24,29 +24,34 @@ const products = [
     },
 ];
 
-
+// コンタクトコンポーネント
 const Contact = () => {
+    // URLにあるパラメータのgetterとsetter
     const [searchParams, setSearchParams] = useSearchParams();
     // const [searchParams] = useSearchParams();
 
     // searchParams.get([パラメータ名])で当該パラメータの値がとれる
     // パラメータ指定無しはエラー
-    const paramsValue = searchParams.get('product_name')
+    const paramsValue = searchParams.get('product_name') // パラメータ"product_name"の値を取得
     console.log(searchParams.get('product_name'));
     console.log(searchParams.get('mameshiba'));
 
     const searchProducts = () => {
-        return products.filter((product) => {
+        return products.filter((product) => { // 検索対象一覧から
+            // パラメータ"product_name"の値と一致または空と一致するkey"product_name"の値があたらtrue
             return product.product_name.includes(
                 searchParams.get('product_name') || ''
             );
         });
     };
 
+    // input type textに値が入ったら発火
     const handleChange = (event) => {
+        // textの値を取得
         const product_name = event.target.value;
         if (product_name) {
-            setSearchParams({ product_name: event.target.value });
+            // 値が空文字ではなかったらtextの値をURLパラメータにセット（検索欄ではない）
+            setSearchParams({ product_name: product_name });
         } else {
             setSearchParams({});
         }
@@ -57,9 +62,10 @@ const Contact = () => {
             <h2>Contact</h2>
             <input type="text" onChange={handleChange} value={paramsValue} />
             <ul>
-                {searchProducts().map((product) => (
+                {/*検索して描画*/}
+                {searchProducts().map((product) => ( // 配列要素先頭から精査
                     <li key={product.id}>
-                        {product.product_name}/{product.price}
+                        {product.product_name}/{product.price} {/*製品名/価格で描画*/}
                     </li>
                 ))}
             </ul>
