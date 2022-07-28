@@ -17,7 +17,10 @@ const PostIndex = () => {
         <ul>
             {posts.map((post) => (
                 <li key={post.id}>
-                    <Link to={`/posts/${post.id}`}>
+                    {/*絶対パスでもいける*/}
+                    {/*<Link to={`/posts/${post.id}`}>*/}
+                    {/*相対パスでもいける*/}
+                    <Link to={`${post.id}`}>
                         {post.id}:{post.title}
                     </Link>
                 </li>

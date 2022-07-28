@@ -1,4 +1,4 @@
-import {Routes, Route, Link, NavLink, useResolvedPath, useMatch} from "react-router-dom";
+import {Routes, Route, Link, NavLink, useResolvedPath, useMatch, Outlet} from "react-router-dom";
 // import TodoList from "./components/TodoList";
 import {RecoilRoot} from "recoil";
 import Home from "./components/Home";
@@ -46,16 +46,32 @@ function App() {
                   </li>
               </ul>
 
+              {/*中央寄せするLayoutコンポーネントで囲ったパターン*/}
+              {/*<Routes>*/}
+              {/*    <Route path="/" element={<Layout><Home /></Layout>} />*/}
+              {/*    <Route path="/about" element={<About />} />*/}
+              {/*    <Route path="/contact" element={<Contact message="Hello Contact"/>} />*/}
+              {/*    <Route path="/posts" element={<Posts />}>*/}
+              {/*        <Route index element={<PostIndex />} />*/}
+              {/*        <Route path=":postId" element={<Post />} />*/}
+              {/*    </Route>*/}
+              {/*    <Route path="*" element={<NoMatch />} />*/}
+              {/*</Routes>*/}
+
               <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/contact" element={<Contact message="Hello Contact"/>} />
-                  <Route path="/posts" element={<Posts />}>
-                      <Route index element={<PostIndex />} />
-                      <Route path=":postId" element={<Post />} />
+                  <Route element={<Layout />}>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/about" element={<About />} />
+                      <Route path="/contact" element={<Contact message="Hello Contact"/>} />
+                      <Route path="/posts" element={<Posts />}>
+                          <Route index element={<PostIndex />} />
+                          <Route path=":postId" element={<Post />} />
+                      </Route>
                   </Route>
+                  {/*エラーページにはLayoutコンポーネントのレイアウトを適用しない*/}
                   <Route path="*" element={<NoMatch />} />
               </Routes>
+
                       {/*<TodoList />*/}
           </div>
       </RecoilRoot>
@@ -76,5 +92,24 @@ const CustomLink = ({ children, to, ...props }) => {
         </div>
     )
 }
+
+// 中央寄せするLayoutコンポーネントで囲ったパターン
+// const Layout = ({children}) => {
+//     return (
+//         <div style={{ display: 'flex', justifyContent: 'center'}} >
+//             {children}
+//         </div>
+//     );
+// };
+
+// Layoutコンポーネントでネストするパターン
+const Layout = () => {
+    return (
+        <div style={{ display: 'flex', justifyContent: 'center'}} >
+            <Outlet />
+        </div>
+    );
+};
+
 
 export default App;
